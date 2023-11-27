@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EncuestaTecnologiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Encuestas">
+          <Key>
+            <PropertyRef Name="EncuestaID" />
+          </Key>
+          <Property Name="EncuestaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaisID" Type="int" />
+          <Property Name="RolID" Type="int" />
+          <Property Name="LenguajePrimarioID" Type="int" />
+          <Property Name="LenguajeSecundarioID" Type="int" />
+        </EntityType>
+        <EntityType Name="LenguajesProgramacion">
+          <Key>
+            <PropertyRef Name="LenguajeID" />
+          </Key>
+          <Property Name="LenguajeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="PaisID" />
+          </Key>
+          <Property Name="PaisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reportes">
+          <Key>
+            <PropertyRef Name="LenguajeID" />
+          </Key>
+          <Property Name="LenguajeID" Type="int" Nullable="false" />
+          <Property Name="NumeroDePosicion" Type="int" />
+          <Property Name="ClasificacionPorcentual" Type="float" />
+          <Property Name="DiferenciaPorcentual" Type="float" />
+        </EntityType>
+        <EntityType Name="RolesTI">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Encuestas__Lengu__5165187F">
+          <End Role="LenguajesProgramacion" Type="Self.LenguajesProgramacion" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LenguajesProgramacion">
+              <PropertyRef Name="LenguajeID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="LenguajePrimarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Encuestas__Lengu__52593CB8">
+          <End Role="LenguajesProgramacion" Type="Self.LenguajesProgramacion" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LenguajesProgramacion">
+              <PropertyRef Name="LenguajeID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="LenguajeSecundarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Encuestas__PaisI__4F7CD00D">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Encuestas__RolID__5070F446">
+          <End Role="RolesTI" Type="Self.RolesTI" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesTI">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reportes__Lengua__08B54D69">
+          <End Role="LenguajesProgramacion" Type="Self.LenguajesProgramacion" Multiplicity="1" />
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LenguajesProgramacion">
+              <PropertyRef Name="LenguajeID" />
+            </Principal>
+            <Dependent Role="Reportes">
+              <PropertyRef Name="LenguajeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EncuestaTecnologiasModelStoreContainer">
+          <EntitySet Name="Encuestas" EntityType="Self.Encuestas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LenguajesProgramacion" EntityType="Self.LenguajesProgramacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reportes" EntityType="Self.Reportes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesTI" EntityType="Self.RolesTI" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Encuestas__Lengu__5165187F" Association="Self.FK__Encuestas__Lengu__5165187F">
+            <End Role="LenguajesProgramacion" EntitySet="LenguajesProgramacion" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Encuestas__Lengu__52593CB8" Association="Self.FK__Encuestas__Lengu__52593CB8">
+            <End Role="LenguajesProgramacion" EntitySet="LenguajesProgramacion" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Encuestas__PaisI__4F7CD00D" Association="Self.FK__Encuestas__PaisI__4F7CD00D">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Encuestas__RolID__5070F446" Association="Self.FK__Encuestas__RolID__5070F446">
+            <End Role="RolesTI" EntitySet="RolesTI" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reportes__Lengua__08B54D69" Association="Self.FK__Reportes__Lengua__08B54D69">
+            <End Role="LenguajesProgramacion" EntitySet="LenguajesProgramacion" />
+            <End Role="Reportes" EntitySet="Reportes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EncuestaTecnologiasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Encuestas">
+          <Key>
+            <PropertyRef Name="EncuestaID" />
+          </Key>
+          <Property Name="EncuestaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaisID" Type="Int32" />
+          <Property Name="RolID" Type="Int32" />
+          <Property Name="LenguajePrimarioID" Type="Int32" />
+          <Property Name="LenguajeSecundarioID" Type="Int32" />
+          <NavigationProperty Name="LenguajesProgramacion" Relationship="Self.FK__Encuestas__Lengu__5165187F" FromRole="Encuestas" ToRole="LenguajesProgramacion" />
+          <NavigationProperty Name="LenguajesProgramacion1" Relationship="Self.FK__Encuestas__Lengu__52593CB8" FromRole="Encuestas" ToRole="LenguajesProgramacion" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK__Encuestas__PaisI__4F7CD00D" FromRole="Encuestas" ToRole="Paises" />
+          <NavigationProperty Name="RolesTI" Relationship="Self.FK__Encuestas__RolID__5070F446" FromRole="Encuestas" ToRole="RolesTI" />
+        </EntityType>
+        <EntityType Name="LenguajesProgramacion">
+          <Key>
+            <PropertyRef Name="LenguajeID" />
+          </Key>
+          <Property Name="LenguajeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Encuestas" Relationship="Self.FK__Encuestas__Lengu__5165187F" FromRole="LenguajesProgramacion" ToRole="Encuestas" />
+          <NavigationProperty Name="Encuestas1" Relationship="Self.FK__Encuestas__Lengu__52593CB8" FromRole="LenguajesProgramacion" ToRole="Encuestas" />
+          <NavigationProperty Name="Reportes" Relationship="Self.FK__Reportes__Lengua__08B54D69" FromRole="LenguajesProgramacion" ToRole="Reportes" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="PaisID" />
+          </Key>
+          <Property Name="PaisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Encuestas" Relationship="Self.FK__Encuestas__PaisI__4F7CD00D" FromRole="Paises" ToRole="Encuestas" />
+        </EntityType>
+        <EntityType Name="Reportes">
+          <Key>
+            <PropertyRef Name="LenguajeID" />
+          </Key>
+          <Property Name="LenguajeID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroDePosicion" Type="Int32" />
+          <Property Name="ClasificacionPorcentual" Type="Double" />
+          <Property Name="DiferenciaPorcentual" Type="Double" />
+          <NavigationProperty Name="LenguajesProgramacion" Relationship="Self.FK__Reportes__Lengua__08B54D69" FromRole="Reportes" ToRole="LenguajesProgramacion" />
+        </EntityType>
+        <EntityType Name="RolesTI">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Encuestas" Relationship="Self.FK__Encuestas__RolID__5070F446" FromRole="RolesTI" ToRole="Encuestas" />
+        </EntityType>
+        <Association Name="FK__Encuestas__Lengu__5165187F">
+          <End Role="LenguajesProgramacion" Type="Self.LenguajesProgramacion" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LenguajesProgramacion">
+              <PropertyRef Name="LenguajeID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="LenguajePrimarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Encuestas__Lengu__52593CB8">
+          <End Role="LenguajesProgramacion" Type="Self.LenguajesProgramacion" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LenguajesProgramacion">
+              <PropertyRef Name="LenguajeID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="LenguajeSecundarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Encuestas__PaisI__4F7CD00D">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Encuestas__RolID__5070F446">
+          <End Role="RolesTI" Type="Self.RolesTI" Multiplicity="0..1" />
+          <End Role="Encuestas" Type="Self.Encuestas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesTI">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Encuestas">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reportes__Lengua__08B54D69">
+          <End Role="LenguajesProgramacion" Type="Self.LenguajesProgramacion" Multiplicity="1" />
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LenguajesProgramacion">
+              <PropertyRef Name="LenguajeID" />
+            </Principal>
+            <Dependent Role="Reportes">
+              <PropertyRef Name="LenguajeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EncuestaTecnologiasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Encuestas" EntityType="Self.Encuestas" />
+          <EntitySet Name="LenguajesProgramacion" EntityType="Self.LenguajesProgramacion" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" />
+          <EntitySet Name="Reportes" EntityType="Self.Reportes" />
+          <EntitySet Name="RolesTI" EntityType="Self.RolesTI" />
+          <AssociationSet Name="FK__Encuestas__Lengu__5165187F" Association="Self.FK__Encuestas__Lengu__5165187F">
+            <End Role="LenguajesProgramacion" EntitySet="LenguajesProgramacion" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Encuestas__Lengu__52593CB8" Association="Self.FK__Encuestas__Lengu__52593CB8">
+            <End Role="LenguajesProgramacion" EntitySet="LenguajesProgramacion" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Encuestas__PaisI__4F7CD00D" Association="Self.FK__Encuestas__PaisI__4F7CD00D">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Encuestas__RolID__5070F446" Association="Self.FK__Encuestas__RolID__5070F446">
+            <End Role="RolesTI" EntitySet="RolesTI" />
+            <End Role="Encuestas" EntitySet="Encuestas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reportes__Lengua__08B54D69" Association="Self.FK__Reportes__Lengua__08B54D69">
+            <End Role="LenguajesProgramacion" EntitySet="LenguajesProgramacion" />
+            <End Role="Reportes" EntitySet="Reportes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EncuestaTecnologiasModelStoreContainer" CdmEntityContainer="EncuestaTecnologiasEntities">
+          <EntitySetMapping Name="Encuestas">
+            <EntityTypeMapping TypeName="EncuestaTecnologiasModel.Encuestas">
+              <MappingFragment StoreEntitySet="Encuestas">
+                <ScalarProperty Name="EncuestaID" ColumnName="EncuestaID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="LenguajePrimarioID" ColumnName="LenguajePrimarioID" />
+                <ScalarProperty Name="LenguajeSecundarioID" ColumnName="LenguajeSecundarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LenguajesProgramacion">
+            <EntityTypeMapping TypeName="EncuestaTecnologiasModel.LenguajesProgramacion">
+              <MappingFragment StoreEntitySet="LenguajesProgramacion">
+                <ScalarProperty Name="LenguajeID" ColumnName="LenguajeID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="EncuestaTecnologiasModel.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reportes">
+            <EntityTypeMapping TypeName="EncuestaTecnologiasModel.Reportes">
+              <MappingFragment StoreEntitySet="Reportes">
+                <ScalarProperty Name="LenguajeID" ColumnName="LenguajeID" />
+                <ScalarProperty Name="NumeroDePosicion" ColumnName="NumeroDePosicion" />
+                <ScalarProperty Name="ClasificacionPorcentual" ColumnName="ClasificacionPorcentual" />
+                <ScalarProperty Name="DiferenciaPorcentual" ColumnName="DiferenciaPorcentual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolesTI">
+            <EntityTypeMapping TypeName="EncuestaTecnologiasModel.RolesTI">
+              <MappingFragment StoreEntitySet="RolesTI">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

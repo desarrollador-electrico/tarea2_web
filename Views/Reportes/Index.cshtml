@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AriasRomanJonathan_Tarea2.Reportes>
+
+@{
+    ViewBag.Title = "Reporte Estadístico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+<table class="table">
+    <tr>
+       <th class="text-center">
+          @Html.DisplayName("Ranking")
+       </th>
+       <th class="text-center">
+          @Html.DisplayName("Nombre del lenguaje")
+       </th>
+        <th class="text-center">
+            @Html.DisplayName("Porcentaje de popularidad (%)")
+        </th>
+        <th class="text-center">
+           @Html.DisplayName("Diferencia porcentual (%)")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.NumeroDePosicion)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.LenguajesProgramacion.Nombre)
+        </td>
+        <td class="text-center">
+            
+            @Html.DisplayFor(modelItem => item.ClasificacionPorcentual)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.DiferenciaPorcentual)
+        </td>
+    </tr>
+}
+
+</table>

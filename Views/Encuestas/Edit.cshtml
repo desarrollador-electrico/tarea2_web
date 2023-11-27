@@ -1,0 +1,85 @@
+﻿@model AriasRomanJonathan_Tarea2.Encuestas
+
+@{
+    ViewBag.Title = "Modificar Respuesta";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Datos de la encuesta</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EncuestaID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           <br />
+            @Html.LabelFor(model => model.Apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Apellidos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           <br />
+           @Html.DisplayName("País de origen")
+           <div class="col-md-10">
+              @Html.DropDownList("PaisID", null, htmlAttributes: new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.PaisID, "", new { @class = "text-danger" })
+           </div>
+        </div>
+
+        <div class="form-group">
+           <br />
+           @Html.DisplayName("Rol de TI")
+           <div class="col-md-10">
+              @Html.DropDownList("RolID", null, htmlAttributes: new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.RolID, "", new { @class = "text-danger" })
+           </div>
+        </div>
+
+        <div class="form-group">
+           <br />
+            @Html.DisplayName("Lenguaje Primario")
+            <div class="col-md-10">
+                @Html.DropDownList("LenguajePrimarioID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LenguajePrimarioID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           <br />
+            @Html.DisplayName("Lenguaje Secundario")
+            <div class="col-md-10">
+                @Html.DropDownList("LenguajeSecundarioID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LenguajeSecundarioID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           <br />
+            <div class="col-md-offset-2 col-md-10">
+               <a href="@Url.Action("Index")" class="btn btn-secondary">Regresar</a> <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

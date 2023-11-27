@@ -1,0 +1,66 @@
+﻿@model AriasRomanJonathan_Tarea2.Encuestas
+
+@{
+    ViewBag.Title = "Datos Almacenados";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Persona encuestada</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+
+        <dt>
+           @Html.DisplayName("Lenguaje Primario")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LenguajesProgramacion.Nombre)
+        </dd>
+
+        <dt>
+           @Html.DisplayName("Lenguaje Secundario")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LenguajesProgramacion1.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("País de origen")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paises.Nombre)
+        </dd>
+
+        <dt>
+           @Html.DisplayName("Rol de TI")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RolesTI.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   <a href="@Url.Action("Edit", new { id = Model.EncuestaID })" class="btn btn-warning">Editar</a>
+   <a href="@Url.Action("Index")" class="btn btn-secondary">Regresar</a>
+</p>

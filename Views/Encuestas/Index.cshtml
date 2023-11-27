@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AriasRomanJonathan_Tarea2.Encuestas>
+
+@{
+    ViewBag.Title = "Listado de encuestas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </th>
+        <th>
+           @Html.DisplayName("Lenguaje Primario")
+        </th>
+        <th>
+           @Html.DisplayName("Lenguaje Secundario")
+        </th>
+        <th>
+           @Html.DisplayName("País de origen")
+        </th>
+        <th>
+           @Html.DisplayName("Rol de TI")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LenguajesProgramacion.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LenguajesProgramacion1.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paises.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RolesTI.Descripcion)
+        </td>
+        <td>
+           <a href="@Url.Action("Edit", new { id = item.EncuestaID })" class="btn btn-warning">Editar</a> |
+           <a href="@Url.Action("Details", new { id = item.EncuestaID })" class="btn btn-info">Detalles</a> |
+           <a href="@Url.Action("Delete", new { id = item.EncuestaID })" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+}
+
+</table>

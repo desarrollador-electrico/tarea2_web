@@ -1,0 +1,51 @@
+﻿@model AriasRomanJonathan_Tarea2.Reportes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reportes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDePosicion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDePosicion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClasificacionPorcentual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClasificacionPorcentual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiferenciaPorcentual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiferenciaPorcentual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LenguajesProgramacion.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LenguajesProgramacion.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LenguajeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
